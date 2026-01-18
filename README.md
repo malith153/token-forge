@@ -1,186 +1,96 @@
-# 🛡️ TokenForge
+# TokenForge
 
-**TokenForge** is a professional, production-ready authentication system built with **NestJS**. It provides a secure, scalable, and modular foundation for managing user identities, roles, and sessions.
+![Thumbnail](docs/assets/thumbnail.png)
 
-> "Identity is the new perimeter."
+## Enterprise Distributed Identity System
 
 <div align="center">
 
-![TokenForge Thumbnail](./docs/assets/thumbnail.png)
-
-![Status](https://img.shields.io/badge/status-active-brightgreen?style=for-the-badge)
-![NestJS](https://img.shields.io/badge/nestjs-10-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
-![Redis](https://img.shields.io/badge/redis-7-DC382D?style=for-the-badge&logo=redis&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/postgresql-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![OIDC](https://img.shields.io/badge/standard-OIDC-orange?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Production_Ready-success?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+![Standard](https://img.shields.io/badge/Standard-OIDC_OAuth2-orange?style=for-the-badge)
 
 </div>
+
+**TokenForge** is a professional Authentication Platform built with **NestJS**. It implements the **OIDC (OpenID Connect)** standard, featuring a hybrid "Stateless Access / Stateful Refresh" architecture that balances horizontal scalability with strict security controls like Instant Revocation and Key Rotation.
 
 ---
 
 ## 🚀 Quick Start
 
-**Get running in 5 minutes**:
+Launch the Identity Infrastructure:
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/Kimosabey/token-forge.git
-cd token-forge
-
-# 2. Start infrastructure (PostgreSQL + Redis)
+# 1. Start DB & Redis
 docker-compose up -d
 
-# 3. Install dependencies & run
-cd backend
-npm install
-npm run start:dev
+# 2. Start Auth Service
+cd backend && npm install && npm run start:dev
 ```
 
-🎉 **Done!** Auth service running at `http://localhost:3000`
-
-👉 **Full Setup Guide**: [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)
+> **Important**: Requires Docker. See [GETTING_STARTED.md](./docs/GETTING_STARTED.md).
 
 ---
 
-## 🏗️ Architecture
+## 📸 Architecture & Patterns
 
-![System Architecture](./docs/assets/architecture.png)
-*High-level OIDC Authentication Flow*
+### 1. High-Level Architecture
+![Architecture](docs/assets/architecture.png)
+*Flow: Client -> Gateway -> Redis Rate Limit -> NestJS Auth -> PostgreSQL*
 
-### Core Components
+### 2. The JWT Refresh Pattern
+![JWT Flow](docs/assets/jwt-refresh.png)
+*Lifecycle: 15m Access Token (Stateless) vs 7d Refresh Token (Stateful)*
 
-- **🔐 NestJS Auth Service**: Modular authentication engine with Passport.js
-- **💾 PostgreSQL**: User accounts, RBAC, audit logs
-- **⚡ Redis**: Session storage, token blacklist, rate limiting
-- **🔑 JWKS**: Automated key rotation with grace periods
+### 3. Security Defense Layers
+![Security](docs/assets/security-layers.png)
+*Defense in Depth: From Network Rate Limits to Database Encryption*
 
-**Want to go deeper?** → [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)
+### 4. Automated Key Rotation
+![Key Rotation](docs/assets/key-rotation.png)
+*JWKS Strategy: Rotating RSA keys every 30 days to limit breach impact*
 
 ---
 
 ## ✨ Key Features
 
-### 🎯 OIDC Compliance
-
-- ✅ **Discovery Endpoint**: `/.well-known/openid-configuration`
-- ✅ **JWKS Public Keys**: `/.well-known/jwks.json`
-- ✅ **Standard Flows**: Authorization Code, Client Credentials
-- ✅ **Token Endpoint**: `/auth/token`
-
-### 🔐 Security-First
-
-![Security Layers](./docs/assets/security-layers.png)
-
-- ✅ **Multi-Factor Authentication (MFA)**: TOTP + Email OTP
-- ✅ **Rate Limiting**: Redis-backed distributed throttling
-- ✅ **Password Hashing**: bcrypt with 12 salt rounds
-- ✅ **JWT Security**: RS256 signatures, automated key rotation
-- ✅ **Audit Logging**: Complete authentication history
-
-### 🔄 Token Management
-
-![JWT Refresh Pattern](./docs/assets/jwt-refresh.png)
-
-- ✅ **Short-lived Access Tokens**: 15 minutes (stateless JWT)
-- ✅ **Long-lived Refresh Tokens**: 7 days (stateful Redis)
-- ✅ **Automatic Rotation**: New tokens on every refresh
-- ✅ **Instant Revocation**: Redis blacklist for immediate logout
-
-### 🔑 Key Rotation
-
-![JWKS Rotation](./docs/assets/key-rotation.png)
-
-- ✅ **Automated Rotation**: Every 30 days
-- ✅ **Grace Period**: 24 hours with both keys valid
-- ✅ **Zero Downtime**: Gradual client migration
-- ✅ **Emergency Rotation**: Manual trigger for security incidents
-
----
-
-## 🛡️ Tech Stack
-
-| Component           | Technology        | Purpose                                  |
-| ------------------- | ----------------- | ---------------------------------------- |
-| **Backend**         | NestJS 10         | Modular auth service with TypeScript     |
-| **Language**        | TypeScript        | Type-safe development                    |
-| **Database**        | PostgreSQL 16     | User accounts, RBAC, audit logs          |
-| **Cache/Sessions**  | Redis 7           | Token storage, rate limiting, blacklist  |
-| **Authentication**  | Passport.js       | Pluggable auth strategies                |
-| **Token Standard**  | JWT (RS256)       | Stateless API authorization              |
-| **Compliance**      | OIDC / OAuth 2.0  | Industry-standard identity protocols     |
-| **Infrastructure**  | Docker Compose    | Local development environment            |
+*   **🛡️ OIDC Compliant**: Provides `/.well-known/openid-configuration` and JWKS endpoints.
+*   **🔑 Asymmetric Security**: Uses **RS256** signatures. Only the Auth Service holds the Private Key.
+*   **🔄 Rotating Refresh Tokens**: Detects token theft by rotating the refresh token family on every use.
+*   **⚡ Redis-Backed**: Sub-millisecond session validation and distributed rate limiting.
 
 ---
 
 ## 📚 Documentation
 
-### 📖 Setup & Operations
-- **[GETTING_STARTED.md](./docs/GETTING_STARTED.md)** - Complete walkthrough (START HERE!)
-
-### 🏗️ Architecture & Design
-- **[ARCHITECTURE.md](./docs/ARCHITECTURE.md)** - System design deep dive
-- **[SECURITY.md](./docs/SECURITY.md)** - Security best practices & threat model
-
-### 🔧 Advanced Topics
-- **[FAILURE_SCENARIOS.md](./docs/FAILURE_SCENARIOS.md)** - Resilience patterns
-- **[INTERVIEW.md](./docs/INTERVIEW.md)** - Technical interview preparation
+| Document | Description |
+| :--- | :--- |
+| [**System Architecture**](./docs/ARCHITECTURE.md) | Standard Patterns, Schema, and Decision Log. |
+| [**Getting Started**](./docs/GETTING_STARTED.md) | Setup Guide and Manual Verification steps. |
+| [**Failure Scenarios**](./docs/FAILURE_SCENARIOS.md) | Handling DB Outages and Redis Failures. |
+| [**Interview Q&A**](./docs/INTERVIEW_QA.md) | "JWT vs Session" and "RS256 vs HS256". |
 
 ---
 
----
+## 🔧 Tech Stack
 
-## 🎯 API Endpoints
-
-### Authentication
-- `POST /auth/register` - User registration
-- `POST /auth/login` - User login (returns access + refresh tokens)
-- `POST /auth/refresh` - Token renewal
-- `POST /auth/logout` - Session termination
-
-### OIDC Discovery
-- `GET /.well-known/openid-configuration` - OIDC metadata
-- `GET /.well-known/jwks.json` - Public signing keys
-
-### User Management
-- `GET /users/me` - Current user profile
-- `PATCH /users/me` - Update profile
-- `POST /users/me/password` - Change password
-- `POST /users/me/mfa` - Enable/disable MFA
-
-### Interactive Docs
-**Swagger UI**: `http://localhost:3000/api/docs` (when service is running)
+| Component | Technology | Role |
+| :--- | :--- | :--- |
+| **Core** | **NestJS 10** | Modular API Framework. |
+| **Identity** | **PostgreSQL 16** | User & RBAC Storage. |
+| **Session** | **Redis 7** | Token Store & Rate Limiter. |
+| **Security** | **Passport.js** | Auth Strategies. |
 
 ---
 
-## 🚀 Future Enhancements
+## 👤 Author
 
-- [x] **Account recovery workflows** (Forgot Password implemented)
-- [x] **MFA implementation** (TOTP + QR Code)
-- [x] **Rate Limiting** (Redis-backed)
-- [ ] OAuth 2.0 Social Login (Google, GitHub, Microsoft)
-- [ ] WebAuthn / Passkey support
-- [ ] Device fingerprinting & tracking
-- [ ] Passwordless authentication (Magic Links)
-- [ ] Admin dashboard (user management UI)
-- [ ] Prometheus metrics export
-- [ ] Grafana monitoring dashboards
-- [ ] Kubernetes deployment manifests
+**Harshan Aiyappa**  
+Senior Full-Stack Hybrid Engineer  
+[GitHub Profile](https://github.com/Kimosabey)
 
 ---
 
 ## 📝 License
 
-MIT License - See [LICENSE](./LICENSE) for details
-
----
-
-## 👨‍💻 Author
-
-**Harshan Aiyappa**  
-Senior Full-Stack Engineer  
-📧 [GitHub](https://github.com/Kimosabey) | [LinkedIn](https://linkedin.com/in/harshan-aiyappa)
-
----
-
-**Built with**: OAuth 2.0 • OIDC • NestJS • Redis • PostgreSQL  
-**Patterns**: JWT Security • Token Rotation • RBAC • Distributed Sessions
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
